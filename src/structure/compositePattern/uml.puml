@@ -1,0 +1,29 @@
+@startuml
+
+abstract class Component {
+  + {abstract} getValue() : double
+  + addComponent() : void
+  + removeComponent() : void
+}
+class Number {
+  - mValue : double
+  + Number(value : double)
+  + getValue() : double
+  + toString() : String
+}
+class Sum {
+  + components : ArrayList<Component>
+  + getValue() : double
+  + addComponent() : void
+  + removeComponent() : void
+  + toString() : String
+}
+
+Component <|-- Number
+Component <|-- Sum
+
+Component <--o Sum
+
+Client .> Component
+
+@enduml

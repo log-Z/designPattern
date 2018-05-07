@@ -1,0 +1,73 @@
+@startuml
+
+class DataBase {
+  + {static} COLUMN_ID : int = 0
+  + {static} COLUMN_NAME : int = 1
+  + {static} COLUMN_SEX : int = 2
+  + {static} COLUMN_AGE : int = 3
+  + queryByEquals(column : int, value : String) : ResultSet
+}
+class ResultSet {
+  - mResult : List<String[]>
+  - row : int = 0
+  ResultSet(result : List<String[]>)
+  + next() : boolean
+  + getData(column : int) : String
+}
+
+DataBase ..> ResultSet
+
+interface UserModelApi {
+  getId() : String
+  setId(id : String) : void
+  getName() : String
+  setName(name : String) : void
+  getSex() : String
+  setSex(sex : String) : void
+  getAge() : String
+  setAge(age : String) : void
+}
+class UserModel {
+  - mId : String
+  - mName : String
+  - mSex : String
+  - mAge : String
+  + getId() : String
+  + setId(id : String) : void
+  + getName() : String
+  + setName(name : String) : void
+  + getSex() : String
+  + setSex(sex : String) : void
+  + getAge() : String
+  + setAge(age : String) : void
+}
+class Proxy {
+  - userModel : UserModel
+  - loaded : boolean = false
+  Proxy(userModel : UserModel)
+  + getId() : String
+  + setId(id : String) : void
+  + getName() : String
+  + setName(name : String) : void
+  + getSex() : String
+  + setSex(sex : String) : void
+  + getAge() : String
+  + setAge(age : String) : void
+  + reload() : void
+}
+class UserManager {
+  getUserById(id : String) : Collection<UserModelApi>
+}
+
+UserModelApi <|.. UserModel
+UserModelApi <|.. Proxy
+
+Proxy -> UserModel
+
+DataBase <. UserManager
+ResultSet <. UserManager
+UserManager ..> UserModelApi
+UserManager <.. Client
+Client .> UserModelApi
+
+@enduml

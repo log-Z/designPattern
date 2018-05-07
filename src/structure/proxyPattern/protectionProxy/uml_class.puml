@@ -1,0 +1,48 @@
+@startuml
+
+interface UserModelApi {
+  getId() : String
+  setId(id : String, oid : String) : boolean
+  getName() : String
+  setName(name : String, id : String) : boolean
+  getSex() : String
+  setSex(sex : String, id : String) : boolean
+  getAge() : int
+  setAge(age : int, id : String) : boolean
+}
+class UserModel {
+  - mId : String
+  - mName : String
+  - mSex : String
+  - mAge : int
+  + UserModel(id : String, name : String, sex : String, age : int)
+  + getId() : String
+  + setId(id : String, oid : String) : boolean
+  + getName() : String
+  + setName(name : String, id : String) : boolean
+  + getSex() : String
+  + setSex(sex : String, id : String) : boolean
+  + getAge() : int
+  + setAge(age : int, id : String) : boolean
+}
+class Proxy {
+  - userModel : UserModel
+  + Proxy(userModel : UserModel)
+  + getId() : String
+  + setId(id : String, oid : String) : boolean
+  + getName() : String
+  + setName(name : String, id : String) : boolean
+  + getSex() : String
+  + setSex(sex : String, id : String) : boolean
+  + getAge() : int
+  + setAge(age : int, id : String) : boolean
+}
+
+UserModelApi <|.. UserModel
+UserModelApi <|.. Proxy
+
+Proxy -> UserModel
+
+Client .> UserModelApi
+
+@enduml

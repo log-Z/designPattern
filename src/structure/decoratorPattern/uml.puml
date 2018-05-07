@@ -1,0 +1,32 @@
+@startuml
+
+interface Window {
+  draw() : void
+}
+class SimpleWindow {
+  + draw() : void
+}
+abstract class WindowDecorator {
+  decoratorWindow : Window
+  WindowDecorator(window : Window)
+}
+class BorderWindow {
+  + BorderWindow(window : Window)
+  + draw() : void
+}
+class TitleBarWindow {
+  + TitleBarWindow(window : Window)
+  + draw() : void
+}
+
+Window <|.. SimpleWindow
+Window <|.. WindowDecorator
+
+WindowDecorator <|-- BorderWindow
+WindowDecorator <|-- TitleBarWindow
+
+WindowDecorator --> Window
+
+Client .> Window
+
+@enduml

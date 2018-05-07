@@ -1,0 +1,34 @@
+@startuml
+
+abstract class Button
+class WinButton
+class MacButton
+abstract class ButtonFactory {
+  + {abstract} createButton() : Button
+}
+class WinButtonFactory {
+  + createButton() : Button
+}
+class MacButtonFactory {
+  + createButton() : Button
+}
+
+Button <|-- WinButton
+Button <|-- MacButton
+ButtonFactory <|-- WinButtonFactory
+ButtonFactory <|-- MacButtonFactory
+
+WinButtonFactory ..> Button
+MacButtonFactory ..> Button
+
+@enduml  删除这行显示更多
+
+
+
+class Client {
+  + {static} main(args : String[]) : void
+}
+ButtonFactory <.. Client
+Client ..> Button
+
+@enduml

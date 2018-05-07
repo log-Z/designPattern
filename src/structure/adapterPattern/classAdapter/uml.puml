@@ -1,0 +1,26 @@
+@startuml
+
+class DCPower {
+  + outputDC220V(float amp) : void
+}
+interface ACPower {
+  + {abstract} outputAC5V(float amp) : void
+}
+class PowerAdapter {
+  + outputAC5V(float amp) : void
+}
+
+DCPower <|-- PowerAdapter
+ACPower <|.. PowerAdapter
+
+@enduml  删除此行可显示更多
+
+
+
+class Client {
+  + {static} main(args : String[]) : void
+}
+
+Client .> ACPower
+
+@enduml

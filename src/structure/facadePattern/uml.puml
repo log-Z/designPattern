@@ -1,0 +1,30 @@
+@startuml
+
+class CPU {
+  freeze() : void
+  jump(position : long) : void
+  execute() : void
+}
+class Memory {
+  load(position : long, data : byte[]) : void
+}
+class HardDrive {
+  read(lba : long, size : int) : byte[]
+}
+class Computer {
+  - {static} BOOT_ADDRESS : long = ...
+  - {static} BOOT_SECTOR : long = ...
+  - {static} SECTOR_SIZE : long = ...
+  - cpu : CPU
+  - memory : Memory
+  - hardDrive : HardDrive
+  + startComputer() : void
+}
+
+Computer --> CPU
+Computer --> Memory
+Computer --> HardDrive
+
+Client .> Computer
+
+@enduml

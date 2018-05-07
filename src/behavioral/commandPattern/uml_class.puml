@@ -1,0 +1,41 @@
+@startuml
+
+class Light {
+  - color : Color
+  Light(c : Color)
+  turnOn() : void
+  turnOff() : void
+}
+interface Command {
+  execute() : void
+  undo() : void
+}
+class TurnOnCommand {
+  - light : Light
+  TurnOnCommand(l : Light)
+  execute() : void
+  undo() : void
+}
+class TurnOffCommand {
+  - light : Light
+  TurnOffCommand(l : Light)
+  execute() : void
+  undo() : void
+}
+class Switch {
+  - history : List<Command>
+  onAction(cmd : Command) : void
+  lollBack(cmd : Command) : void
+}
+
+Command <|-- TurnOnCommand
+Command <|-- TurnOffCommand
+
+Switch o-> Command
+TurnOnCommand --> Light
+TurnOffCommand --> Light
+Client --> Light
+
+Command <. Client
+
+@enduml

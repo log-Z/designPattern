@@ -1,0 +1,45 @@
+@startuml
+
+class Noodles {
+  + name : String
+  + noodleShape : String
+  + noodleWidth : int
+  + ingredients : String
+}
+abstract class NoodlesBuilder {
+  mNoodles : Noodles
+  + createNewNoodles() : void
+  + getNoodles() : Noodles
+  + {abstract} buildNoodleShape() : void
+  + {abstract} buildNoodleWidth() : void
+  + {abstract} buildIngredients() : void
+}
+class LaoyouRiceNoodlesBuilder {
+  + createNewNoodles() : void
+  + buildNoodleShape() : void
+  + buildNoodleWidth() : void
+  + buildIngredients() : void
+}
+class LuosifenBuilder {
+  + createNewNoodles() : void
+  + buildNoodleShape() : void
+  + buildNoodleWidth() : void
+  + buildIngredients() : void
+}
+class Waiter {
+  - mNoodlesBuilder : NoodlesBuilder
+  + setNoodlesBuilder(builder : NoodlesBuilder) : void
+  + getNoodles() : Noodles
+  + constructNoodles() : boolean
+}
+
+NoodlesBuilder <|-- LaoyouRiceNoodlesBuilder
+NoodlesBuilder <|-- LuosifenBuilder
+
+Waiter o--> NoodlesBuilder
+Noodles <- NoodlesBuilder
+
+Client .> Waiter
+Client ..> Noodles
+
+@enduml

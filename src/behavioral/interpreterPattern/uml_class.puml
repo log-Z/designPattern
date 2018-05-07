@@ -1,0 +1,57 @@
+@startuml
+
+interface ReadXmlExpression {
+  + interpret(context : Context) : String[]
+}
+class ElementExpression {
+  - eles : Collection<ReadXmlExpression>
+  - eleName : String
+  ElementExpression(eleName : String)
+  addEle(ele : ReadXmlExpression) : boolean
+  removeEle(ele : ReadXmlExpression) : boolean
+  + interpret(context : Context) : String[]
+}
+class ElementsExpression {
+  - eles : Collection<ReadXmlExpression>
+  - eleName : String
+  ElementsExpression(eleName : String)
+  addEle(ele : ReadXmlExpression) : boolean
+  removeEle(ele : ReadXmlExpression) : boolean
+  + interpret(context : Context) : String[]
+}
+class ElementTerminalExpression {
+  - eleName : String
+  ElementTerminalExpression(eleName : String)
+  + interpret(context : Context) : String[]
+}
+class ElementsTerminalExpression {
+  - eleName : String
+  ElementsTerminalExpression(eleName : String)
+  + interpret(context : Context) : String[]
+}
+class PropertysTerminalExpression {
+  - propName : String
+  PropertysTerminalExpression(eleName : String)
+  + interpret(context : Context) : String[]
+}
+class Context {
+  - document : Document
+  - preEles : List<Element>
+  Context(filePathName : String)
+  reInit() : void
+  getNowEles(parent : Element, eleName : String) : List<Element>
+  getDocument() : Document
+  getPreEles() : List<Element>
+  setPreEles(nowEles : List<Element>) : void
+}
+
+ReadXmlExpression <|.. ElementExpression
+ReadXmlExpression <|.. ElementsExpression
+ReadXmlExpression <|.. ElementTerminalExpression
+ReadXmlExpression <|.. ElementsTerminalExpression
+ReadXmlExpression <|.. PropertysTerminalExpression
+
+Clint ..> ReadXmlExpression
+Context <. Clint
+
+@enduml

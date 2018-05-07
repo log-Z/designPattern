@@ -1,0 +1,29 @@
+@startuml
+
+interface VGA {
+  {abstract} output() : String
+}
+class HDMI {
+  output() : byte[]
+}
+class VideoAdapter {
+  - hdmi : HDMI
+  + VideoAdapter(hdmi : HDMI)
+  + output() : String
+}
+
+VGA <|.. VideoAdapter
+HDMI <-- VideoAdapter
+
+@enduml  删除这行可显示更多
+
+
+
+class Client {
+  + {static} main(args : String[]) : void
+}
+
+Client ..> VGA
+Client ..> HDMI
+
+@enduml

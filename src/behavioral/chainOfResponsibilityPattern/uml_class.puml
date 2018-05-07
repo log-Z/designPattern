@@ -1,0 +1,26 @@
+@startuml
+
+abstract class Handler {
+  - next : Handler
+  + setNext(next : Handler) : void
+  + handlerRequest(request : String) : void
+  # {abstract} handler(request : String) : boolean
+}
+class LongHandler {
+  # handler(request : String) : boolean
+}
+class DoubleHandler {
+  # handler(request : String) : boolean
+}
+class NonNumberHandler {
+  # handler(request : String) : boolean
+}
+
+Handler <|-- LongHandler
+Handler <|-- DoubleHandler
+Handler <|-- NonNumberHandler
+
+Handler <- Handler
+Client -> Handler
+
+@enduml

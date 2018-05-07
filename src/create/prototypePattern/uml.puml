@@ -1,0 +1,18 @@
+@startuml
+
+abstract class File {
+  + name : String
+  + data : byte[]
+  + File(name : String, data : byte[])
+  + clone() : Object
+}
+class TextFile {
+  + TextFile(name : String, data : String)
+}
+class ImageFile {
+}
+
+File <|-- TextFile
+File <|-- ImageFile
+
+@enduml

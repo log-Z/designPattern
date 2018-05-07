@@ -1,0 +1,14 @@
+@startuml
+object computer
+object collectionFlyweight1
+object gpuFlyweight1
+object gpuFlyweight2
+object motherboardFlyweight1
+object motherboardFlyweight2
+
+computer --> gpuFlyweight1
+computer --> motherboardFlyweight1
+collectionFlyweight1 --> gpuFlyweight2
+collectionFlyweight1 --> motherboardFlyweight2
+
+@enduml

@@ -1,0 +1,79 @@
+设计模式 - 抽象对象
+@startuml
+
+abstract class DigitalFactory {
+  {abstract} createComputer() : Computer
+  {abstract} createPhone() : Phone
+}
+abstract class Computer
+abstract class Phone
+class LenovoFactory {
+  createComputer() : Computer
+  createPhone() : Phone
+}
+class XiaomiFactory {
+  createComputer() : Computer
+  createPhone() : Phone
+}
+class LenovoComputer
+class LenovoPhone
+class XiaomiComputer
+class XiaomiPhone
+
+Client ..> DigitalFactory
+Client ..> Computer
+Client ..> Phone
+
+DigitalFactory <|-- LenovoFactory
+DigitalFactory <|-- XiaomiFactory
+Computer <|-- LenovoComputer
+Computer <|-- XiaomiComputer
+Phone <|-- LenovoPhone
+Phone <|-- XiaomiPhone
+
+LenovoFactory ..> LenovoComputer
+LenovoFactory ..> LenovoPhone
+XiaomiFactory ..> XiaomiComputer
+XiaomiFactory ..> XiaomiPhone
+
+@enduml  删掉这行可显示更多
+
+
+
+abstract class AbstractFactory {
+  {abstract} createProductA() : AbstractProductA
+  {abstract} createProductB() : AbstractProductB
+}
+abstract class AbstractProductA
+abstract class AbstractProductB
+class ConcreteFactory1 {
+  createProductA() : AbstractProductA
+  createProductB() : AbstractProductB
+}
+class ConcreteFactory2 {
+  createProductA() : AbstractProductA
+  createProductB() : AbstractProductB
+}
+class ProductA1
+class ProductA2
+class ProductB1
+class ProductB2
+class Client
+
+Client --> AbstractFactory
+Client --> AbstractProductA
+Client --> AbstractProductB
+
+AbstractFactory <|-- ConcreteFactory1
+AbstractFactory <|-- ConcreteFactory2
+AbstractProductA <|-- ProductA1
+AbstractProductA <|-- ProductA2
+AbstractProductB <|-- ProductB1
+AbstractProductB <|-- ProductB2
+
+ConcreteFactory1 ..> ProductA1
+ConcreteFactory1 ..> ProductB1
+ConcreteFactory2 ..> ProductA2
+ConcreteFactory2 ..> ProductB2
+
+@enduml

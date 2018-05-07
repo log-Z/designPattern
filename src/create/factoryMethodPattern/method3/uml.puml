@@ -1,0 +1,41 @@
+@startuml
+
+abstract class ImageReader {
+  + ImageReader(is : InputStream)
+}
+class JPEGReader {
+  + JPEGReader(is : InputStream)
+}
+class GIFReader {
+  + GIFReader(is : InputStream)
+}
+class PNGReader {
+  + PNGReader(is : InputStream)
+}
+class ImageReaderFactory {
+  + {static} JPEG : int
+  + {static} GIF : int
+  + {static} PNG : int
+  - ImageReaderFactory()
+  + {static} createImageReader(is : InputStream) : ImageReader
+  - {static} determineImageType(is : InputStream) : int
+}
+
+ImageReader <|-- JPEGReader
+ImageReader <|-- GIFReader
+ImageReader <|-- PNGReader
+
+ImageReaderFactory ..> ImageReader
+
+@enduml  删除这行可显示更多
+
+
+
+class Client {
+  + {static} main(args : String[]) : void
+}
+
+Client .> ImageReaderFactory
+Client ..> ImageReader
+
+@enduml

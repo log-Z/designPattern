@@ -1,0 +1,22 @@
+@startuml
+
+class Image {
+  + width : int
+  + height : int
+  - Image(width : int, height : int)
+  + {static} createImageByPixel(width : int, height : int) : Image
+  + {static} createImageByPoint(width : int, height : int) : Image
+}
+
+Image <.. Image
+
+@enduml  删除此行可显示更多
+
+
+class Client {
+  + {static} main(args : String[]) : void
+}
+
+Client .> Image
+
+@enduml

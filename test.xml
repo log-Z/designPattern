@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+    <user id="001" name="张三" />
+    <user id="002" name="李四" />
+    <user id="003" name="王五" />
+</root>

@@ -1,0 +1,35 @@
+@startuml
+
+abstract class Shape {
+  color : Color
+  + setColor(color : Color) : void
+  + {abstract} draw() : void
+}
+class Circle {
+  + draw() : void
+}
+class Polygon {
+  + draw() : void
+}
+interface Color {
+  getColor() : String
+}
+class Red {
+  getColor() : String
+}
+class Green {
+  getColor() : String
+}
+
+Shape <|-- Circle
+Shape <|-- Polygon
+Color <|-- Red
+Color <|-- Green
+
+Shape o-> Color
+
+
+
+Client ..> Shape
+
+@enduml

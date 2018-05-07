@@ -1,0 +1,23 @@
+@startuml
+
+interface TouchListener {
+  {abstract} onClick() : void
+  {abstract} onLongClick() : void
+}
+abstract class TouchAdapter {
+  + onClick() : void
+  + onLongClick() : void
+}
+
+TouchListener <|.. TouchAdapter
+
+@enduml  删除此行可显示更多
+
+
+class Client {
+  + {static} main(args : String[]) : void
+}
+
+Client .> TouchListener
+
+@enduml

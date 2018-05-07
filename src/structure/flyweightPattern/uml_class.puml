@@ -1,0 +1,53 @@
+@startuml
+
+interface ComputerFlyweight {
+  match(model : String, version : String) : boolean
+  add(flyweight : ComputerFlyweight) : void
+}
+class CollectionFlyweight {
+  - flyweights : List<ComputerFlyweight>
+  + match(model : String, version : String) : boolean
+  + add(flyweight : ComputerFlyweight) : void
+}
+class GPUFlyweight {
+  - model : String
+  - version : String
+  GPUFlyweight(model : String, version : String)
+  + match(model : String, version : String) : boolean
+  + add(flyweight : ComputerFlyweight) : void
+}
+class MotherboardFlyweight {
+  - model : String
+  - version : String
+  MotherboardFlyweight(model : String, version : String)
+  + match(model : String, version : String) : boolean
+  + add(flyweight : ComputerFlyweight) : void
+}
+class ComputerFlyweightFactory {
+  - {static} INSTANCE : ComputerFlyweightFactory
+  - fsMap : Map<String, ComputerFlyweight>
+  - ComputerFlyweightFactory()
+  + {static} getInstance() : ComputerFlyweightFactory
+  + getGPUFlyweight(model : String, version : String) : ComputerFlyweight
+  + getMotherboardFlyweight(model : String) : ComputerFlyweight
+}
+class Computer {
+  - gpu : GPUFlyweight
+  - motherboard : MotherboardFlyweight
+  Computer(gpu : GPUFlyweight, motherboard : MotherboardFlyweight)
+  contain(model : String, version : String) : boolean
+}
+
+ComputerFlyweight <|.. CollectionFlyweight
+ComputerFlyweight <|.. GPUFlyweight
+ComputerFlyweight <|.. MotherboardFlyweight
+
+ComputerFlyweightFactory --> ComputerFlyweight
+Computer --> ComputerFlyweight
+
+Client -> ComputerFlyweightFactory
+Client --> Computer
+
+Client ..> ComputerFlyweight
+
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+
+class Earth {
+  - {static} INSTANCE : Earth
+  - Earth()
+  - getInstance() : Earth
+}
+
+Earth <-- Earth
+
+@enduml
