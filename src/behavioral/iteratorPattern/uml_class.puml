@@ -1,0 +1,41 @@
+@startuml
+
+interface Iterator<T> {
+  first() : void
+  next() : void
+  isDone() : boolean
+  currentItem() : T
+}
+class ReverseIterator<T> {
+  - aggregate : Aggregate<T>
+  - index : int
+  ReverseIterator(aggregate : Aggregate<T>)
+  first() : void
+  next() : void
+  isDone() : boolean
+  currentItem() : T
+}
+interface Aggregate<T> {
+  createIterator() : Iterator
+  get(int i) : T
+  size() : int
+}
+class ArrayAggregate<T> {
+  - array : T[]
+  ArrayAggregate(array : T[])
+  createIterator() : Iterator
+  get(int i) : T
+  size() : int
+}
+
+Iterator <|.. ReverseIterator
+Aggregate <|.. ArrayAggregate
+
+Aggregate <-- ReverseIterator
+
+ArrayAggregate .> ReverseIterator
+
+Client .> Iterator
+Aggregate <. Client
+
+@enduml
