@@ -1,0 +1,33 @@
+@startuml
+
+interface View {
+  setValue(value : String) : void
+  getValue() : String
+  addOnChangeListener(listener : OnChangeListener) : void
+  removeOnChangeListener(listener : OnChangeListener) : void
+}
+class TextView {
+  - value: String
+  - onChangeListenerSet = HashSet<OnChangeListener>
+  setValue(value : String) : void
+  getValue() : String
+  addOnChangeListener(listener : OnChangeListener) : void
+  removeOnChangeListener(listener : OnChangeListener) : void
+}
+interface OnChangeListener {
+  onChange(v : View)
+}
+class OnTextViewChangeListener {
+  onChange(v : View)
+}
+
+View <|.. TextView
+OnChangeListener <|.. OnTextViewChangeListener
+
+View *-> OnChangeListener
+
+View <.. OnChangeListener
+Client ..> View
+Client ..> OnChangeListener
+
+@enduml
